@@ -22,7 +22,7 @@ buildNumber.properties
 .classpath
 
 .idea
-apache-tomcat-10.0.12/
+apache-tomcat*/
 lib/
 out/
 # End of https://www.toptal.com/developers/gitignore/api/maven

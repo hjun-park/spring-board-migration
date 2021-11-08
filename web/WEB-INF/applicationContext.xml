@@ -3,8 +3,38 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+       xmlns:beans="http://www.springframework.org/schema/beans"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
+    <bean id="ds" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url"
+                  value="jdbc:mysql://database-1.cvr6eptjncnz.ap-northeast-2.rds.amazonaws.com:3306/boardDB?autoReconnect=true"/>
+        <property name="username" value="root"/>
+        <property name="password" value="dbslqmtlxl"/>
+    </bean>
+
+    <!-- root context에 SqlSession을 생성할 수 있는 Factory 설정 -->
+    <!-- https://soulno.tistory.com/26 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="ds"/>
+        <property name="mapperLocations" value="classpath:mapper/**/*Mapper.xml"/>
+    </bean>
+
+    <!-- MyBatis가 자동으로 객체 생성해 줌 -->
+    <!-- 위 xsd에 mybatis-spring 추가 -->
+<!--    <mybatis-spring:scan base-package=""/>-->
+
+
+    <!-- sqlSessionFactory를 생성자로 주입해서 설정, sqlsession 인터페이스를 구현한 것이 sqlSessionTemplate -->
+    <!-- JPA의 EntityManager와 비슷한 느낌 -->
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+        <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
 
 </beans>
+
 

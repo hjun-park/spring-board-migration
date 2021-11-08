@@ -29,6 +29,7 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
+
 <!--    &lt;!&ndash; encoding filter &ndash;&gt;-->
 <!--    <filter>-->
 <!--        <filter-name>encodingFilter</filter-name>-->

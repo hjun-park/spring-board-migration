@@ -25,4 +25,5 @@ buildNumber.properties
 apache-tomcat*/
 lib/
 out/
+*.iml
 # End of https://www.toptal.com/developers/gitignore/api/maven

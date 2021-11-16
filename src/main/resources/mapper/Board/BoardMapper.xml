@@ -3,13 +3,40 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-    <mapper namespace="com.example.mapper.Board">
-        <select id="getTime" resultType="string">
-            select now()
-        </select>
+<mapper namespace="com.example.mapper.Board">
+    <select id="getTime" resultType="string">
+        select now()
+    </select>
 
-        <insert id="create">
-            insert into board(title, content)
-            values(#{title}, #{content})
-        </insert>
-    </mapper>
+    <insert id="create">
+        insert into Board(title, content, writer)
+        values (#{title}, #{content}, #{writer})
+    </insert>
+
+    <select id="findAll" resultType="com.example.src.model.BoardVO">
+    <![CDATA[
+        select *
+        from Board
+        where id > 0
+        order by id desc, createdAt desc
+    ]]>
+    </select>
+
+    <select id="read" resultType="com.example.src.model.BoardVO">
+        select id, title, content, writer, viewcnt, createdAt
+        from Board
+        where id = #{id}
+    </select>
+
+    <update id="update">
+        update Board set title = #{title}, content = #{content} where id = #{id}
+    </update>
+
+    <delete id="delete">
+        delete from Board where id = #{id}
+    </delete>
+
+
+
+
+</mapper>

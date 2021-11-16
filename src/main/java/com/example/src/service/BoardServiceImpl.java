@@ -1,10 +1,14 @@
 package com.example.src.service;
 
-import com.example.src.domain.BoardVO;
 import com.example.src.domain.BoardDAO;
+import com.example.src.model.BoardDTO;
+import com.example.src.model.BoardVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -19,7 +23,61 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void createBoard(BoardVO boardVO) {
-		boardDAO.createBoard(boardVO);
+	public List<BoardDTO> findAll() throws Exception {
+		List<BoardVO> boardList = boardDAO.findAll();
+
+		return boardList.stream()
+			.map(boardVO -> BoardDTO.builder()
+				.title(boardVO.getTitle())
+				.content(boardVO.getContent())
+				.writer(boardVO.getWriter())
+				.viewcnt(boardVO.getViewcnt())
+				.createdAt(boardVO.getCreatedAt())
+				.build()
+			)
+			.collect(Collectors.toList());
+	}
+
+	@Override
+	public void regist(BoardDTO boardDTO) throws Exception {
+
+		BoardVO boardVO = BoardVO.builder()
+			.title(boardDTO.getTitle())
+			.content(boardDTO.getContent())
+			.writer(boardDTO.getWriter())
+			.build();
+
+		boardDAO.create(boardVO);
+	}
+
+	@Override
+	public BoardDTO read(Long boardId) throws Exception {
+		BoardVO board = boardDAO.read(boardId);
+
+
+		return BoardDTO.builder()
+			.title(board.getTitle())
+			.content(board.getContent())
+			.writer(board.getWriter())
+			.build();
+
+	}
+
+	@Override
+	public void modify(BoardDTO boardDTO) throws Exception {
+
+		BoardVO boardVO = BoardVO.builder()
+			.title(boardDTO.getTitle())
+			.content(boardDTO.getContent())
+			.writer(boardDTO.getWriter())
+			.build();
+
+		boardDAO.update(boardVO);
+	}
+
+
+	@Override
+	public void remove(Long id) throws Exception {
+		boardDAO.delete(id);
 	}
 }

@@ -1,8 +1,11 @@
 package com.example.src.domain;
 
+import com.example.src.model.BoardVO;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
@@ -18,7 +21,28 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public void createBoard(BoardVO boardVO) {
+	public void create(BoardVO boardVO) {
 		sqlSession.insert(namespace + ".create", boardVO);
+	}
+
+	@Override
+	public BoardVO read(Long id) throws Exception {
+		return sqlSession.selectOne(namespace + ".read", id);
+	}
+
+	@Override
+	public void update(BoardVO boardVO) throws Exception {
+		sqlSession.update(namespace + ".update", boardVO);
+	}
+
+	@Override
+	public void delete(Long id) throws Exception {
+		sqlSession.delete(namespace + ".delete", id);
+	}
+
+
+	@Override
+	public List<BoardVO> findAll() {
+		return sqlSession.selectList(namespace + ".findAll");
 	}
 }

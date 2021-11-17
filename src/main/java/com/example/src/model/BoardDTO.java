@@ -1,16 +1,15 @@
 package com.example.src.model;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class BoardDTO {
 
+	private Long id;
 	private String title;
 	private String content;
 	private String writer;
@@ -23,8 +22,10 @@ public class BoardDTO {
 		this.writer = writer;
 	}
 
+
 	@Builder
-	public BoardDTO(String title, String content, String writer, Long viewcnt, LocalDateTime createdAt) {
+	public BoardDTO(Long id, String title, String content, String writer, Long viewcnt, LocalDateTime createdAt) {
+		this.id = id;
 		this.title = title;
 		this.content = content;
 		this.writer = writer;

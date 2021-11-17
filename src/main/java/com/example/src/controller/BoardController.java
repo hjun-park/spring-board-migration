@@ -3,17 +3,17 @@ package com.example.src.controller;
 import com.example.src.model.BoardDTO;
 import com.example.src.service.BoardService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping
 public class BoardController {
 
 	private final BoardService boardService;
@@ -28,21 +28,19 @@ public class BoardController {
 		model.addAttribute("listAll", boardService.findAll()); // jsp에 심부름할 내역(서비스 호출)
 	}
 
-	@GetMapping("/regist") // POST방식으로 내용 전송
-	public String registGET() throws Exception {
-		return "regist";
+	@GetMapping("/regist") // GET 방식으로 페이지 호출
+	public void registerGET(BoardDTO board, Model model) throws Exception {
 	}
 
 	@PostMapping("/regist") // POST방식으로 내용 전송
-	public String registPOST(@ModelAttribute("regist") BoardDTO board, RedirectAttributes rttr) throws Exception {
-
-		boardService.regist(board); // 글작성 서비스 호출
-		return "redirect:/listAll"; // 작성이 완료된 후, 목록페이지로 리턴
+	public String registPOST(BoardDTO board, RedirectAttributes rttr) throws Exception {
+		boardService.regist(board);
+		return "redirect:/listAll";
 	}
 
 	@GetMapping("/modify") // GET 방식으로 페이지 호출
-	public void modifyGET(Long boardId, Model model) throws Exception {
-		model.addAttribute(boardService.read(boardId)); // 수정을 위한 글읽기 서비스 호출
+	public void modifyGET(@RequestParam Long id, Model model) throws Exception {
+		model.addAttribute(boardService.read(id)); // 수정을 위한 글읽기 서비스 호출
 	}
 
 	@PostMapping("/modify")// POST방식으로 데이터 전송
@@ -51,10 +49,16 @@ public class BoardController {
 		return "redirect:/listAll"; // 수정이 완료된 후, 목록페이지로 리턴
 	}
 
-	@PostMapping(value = "/remove")// POST방식으로 데이터 전송
+	@PostMapping("/remove")// POST방식으로 데이터 전송
 	public String removePOST(@RequestParam("id") Long id, RedirectAttributes rttr) throws Exception {
 		boardService.remove(id); // 글삭제 서비스 호출
 		return "redirect:/listAll"; // 삭제가 완료된 후, 목록페이지로 리턴
+	}
+
+	@GetMapping("/read") // GET 방식으로 페이지 호출
+	public void read(@RequestParam Long id, Model model) throws Exception {
+		// 인자값은 파라미터 값으로 기본키인 글번호를 기준으로 Model을 사용하여 불러옴
+		model.addAttribute(boardService.read(id)); // read 서비스 호출
 	}
 
 }

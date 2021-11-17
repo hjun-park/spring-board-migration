@@ -1,0 +1,4 @@
+<!--한글처리-->
+<Connector port="8080" maxThreads="150" minSpareThreads="25" maxSpareThreads="75" enableLookups="false"
+           redirectPort="8443" acceptCount="100" debug="0" connectionTimeout="20000" disableUploadTimeout="true"
+           useBodyEncodingForURI="true" URIEncoding="utf-8"/>

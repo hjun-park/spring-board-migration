@@ -28,6 +28,7 @@ public class BoardServiceImpl implements BoardService {
 
 		return boardList.stream()
 			.map(boardVO -> BoardDTO.builder()
+				.id(boardVO.getId())
 				.title(boardVO.getTitle())
 				.content(boardVO.getContent())
 				.writer(boardVO.getWriter())
@@ -56,6 +57,7 @@ public class BoardServiceImpl implements BoardService {
 
 
 		return BoardDTO.builder()
+			.id(board.getId())
 			.title(board.getTitle())
 			.content(board.getContent())
 			.writer(board.getWriter())
@@ -67,6 +69,7 @@ public class BoardServiceImpl implements BoardService {
 	public void modify(BoardDTO boardDTO) throws Exception {
 
 		BoardVO boardVO = BoardVO.builder()
+			.id(boardDTO.getId())
 			.title(boardDTO.getTitle())
 			.content(boardDTO.getContent())
 			.writer(boardDTO.getWriter())

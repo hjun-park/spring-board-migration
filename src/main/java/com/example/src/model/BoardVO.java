@@ -1,14 +1,11 @@
 package com.example.src.model;
 
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Getter
+@Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class BoardVO {
 
@@ -20,7 +17,8 @@ public class BoardVO {
 	private LocalDateTime createdAt;
 
 	@Builder
-	public BoardVO(String title, String content, String writer) {
+	public BoardVO(Long id, String title, String content, String writer) {
+		this.id = id;
 		this.title = title;
 		this.content = content;
 		this.writer = writer;

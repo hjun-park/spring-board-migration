@@ -8,7 +8,7 @@
         select now()
     </select>
 
-    <insert id="create">
+    <insert id="create" parameterType="com.example.src.model.BoardVO">
         insert into Board(title, content, writer)
         values (#{title}, #{content}, #{writer})
     </insert>
@@ -19,7 +19,7 @@
         from Board
         where id > 0
         order by id desc, createdAt desc
-    ]]>
+        ]]>
     </select>
 
     <select id="read" resultType="com.example.src.model.BoardVO">
@@ -28,15 +28,18 @@
         where id = #{id}
     </select>
 
-    <update id="update">
-        update Board set title = #{title}, content = #{content} where id = #{id}
+    <update id="update" parameterType="com.example.src.model.BoardVO">
+        UPDATE Board
+        SET title   = #{title},
+            content = #{content}
+        where id = #{id};
     </update>
 
     <delete id="delete">
-        delete from Board where id = #{id}
+        delete
+        from Board
+        where id = #{id}
     </delete>
-
-
 
 
 </mapper>

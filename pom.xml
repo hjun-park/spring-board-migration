@@ -17,6 +17,13 @@
         <log4j.version>2.11.0</log4j.version>
     </properties>
 
+    <!-- ojdbc 다운받기위해 추가 -->
+    <repository>
+        <id>oracle</id>
+        <name>ORACLE JDBC Repository</name>
+        <url>http://mesir.googlecode.com/svn/trunk/mavenrepo</url>
+    </repository>
+
 
     <dependencies>
         <dependency>
@@ -43,17 +50,44 @@
             <version>2.0.6</version>
         </dependency>
 
+        <!-- Oracle -->
+        <dependency>
+            <groupId>com.oracle.database.jdbc</groupId>
+            <artifactId>ojdbc6</artifactId>
+            <version>11.2.0.4</version>
+        </dependency>
+
+
+        <!--        <dependency>-->
+        <!--            <groupId>com.oracle.ojdbc</groupId>-->
+        <!--            <artifactId>ojdbc8</artifactId>-->
+        <!--            <version>19.3.0.0</version>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.oracle.ojdbc</groupId>-->
+        <!--            <artifactId>orai18n</artifactId>-->
+        <!--            <version>19.3.0.0</version>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.oracle</groupId>-->
+        <!--            <artifactId>odjbc7</artifactId>-->
+        <!--            <version>1.0</version>-->
+        <!--            <scope>system</scope>-->
+        <!--            <systemPath>${basedir}/web/WEB-INF/lib/ojdbc7.jar</systemPath>-->
+        <!--        </dependency>-->
+
+
         <!--        <dependency>-->
         <!--            <groupId>mysql</groupId>-->
         <!--            <artifactId>mysql-connector-java</artifactId>-->
         <!--            <version>8.0.24</version>-->
         <!--        </dependency>-->
 
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.49</version>
-        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>mysql</groupId>-->
+        <!--            <artifactId>mysql-connector-java</artifactId>-->
+        <!--            <version>5.1.49</version>-->
+        <!--        </dependency>-->
 
 
         <dependency>

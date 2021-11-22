@@ -11,8 +11,15 @@
 
     <context:property-placeholder location="classpath*:application-prod.properties" />
 
+<!--    <bean id="ds" class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
+<!--        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>-->
+<!--        <property name="url" value="${aws.db.host}"/>-->
+<!--        <property name="username" value="${aws.db.id}"/>-->
+<!--        <property name="password" value="${aws.db.password}"/>-->
+<!--    </bean>-->
+
     <bean id="ds" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
         <property name="url" value="${aws.db.host}"/>
         <property name="username" value="${aws.db.id}"/>
         <property name="password" value="${aws.db.password}"/>

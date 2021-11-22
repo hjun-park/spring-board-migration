@@ -38,11 +38,11 @@
                 <td>${boardDTO.id}</td>
                 <td><a href='/read?id=${boardDTO.id}'>${boardDTO.title}</a></td>
                 <td>${boardDTO.writer}</td>
-<%--                <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardDTO.createdAt}"/></td>--%>
+                <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardDTO.createdAt}"/></td>
                 <%-- LocalDateTime ----> Date 변환 --%>
                 <td>
-                    <fmt:parseDate value="${boardDTO.createdAt}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both"/>
-                    <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${ parsedDateTime }"/>
+<%--                    <fmt:parseDate value="${boardDTO.createdAt}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both"/>--%>
+<%--                    <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${ parsedDateTime }"/>--%>
                 </td>
                 <td><span class="badge bg-red">${boardDTO.viewcnt}</span></td>
             </tr>

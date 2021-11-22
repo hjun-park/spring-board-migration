@@ -4,22 +4,17 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.mapper.Board">
-    <select id="getTime" resultType="string">
-        select now()
-    </select>
 
     <insert id="create" parameterType="com.example.src.model.BoardVO">
-        insert into Board(title, content, writer)
-        values (#{title}, #{content}, #{writer})
+        INSERT INTO BOARD(id, title, content, writer)
+        values(BOARD_SEQ.NEXTVAL, #{title}, #{content}, #{writer})
     </insert>
 
     <select id="findAll" resultType="com.example.src.model.BoardVO">
-    <![CDATA[
         select *
-        from Board
+        from BOARD
         where id > 0
         order by id desc, createdAt desc
-        ]]>
     </select>
 
     <select id="read" resultType="com.example.src.model.BoardVO">
@@ -32,7 +27,7 @@
         UPDATE Board
         SET title   = #{title},
             content = #{content}
-        where id = #{id};
+        where id = #{id}
     </update>
 
     <delete id="delete">

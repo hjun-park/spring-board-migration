@@ -26,6 +26,8 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardDTO> findAll() throws Exception {
 		List<BoardVO> boardList = boardDAO.findAll();
 
+		System.out.println("boardList = " + boardList.get(0).getCreatedAt());
+
 		return boardList.stream()
 			.map(boardVO -> BoardDTO.builder()
 				.id(boardVO.getId())
@@ -37,6 +39,7 @@ public class BoardServiceImpl implements BoardService {
 				.build()
 			)
 			.collect(Collectors.toList());
+
 	}
 
 	@Override

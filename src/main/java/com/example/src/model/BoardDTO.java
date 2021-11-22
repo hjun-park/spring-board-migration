@@ -1,8 +1,9 @@
 package com.example.src.model;
 
 import lombok.*;
+import oracle.sql.TIMESTAMP;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 @Getter
 @Setter
@@ -14,7 +15,9 @@ public class BoardDTO {
 	private String content;
 	private String writer;
 	private Long viewcnt;
-	private LocalDateTime createdAt;
+	//	private LocalDateTime createdAt;
+	private Timestamp createdAt;
+
 
 	public BoardDTO(String title, String content, String writer) {
 		this.title = title;
@@ -22,9 +25,8 @@ public class BoardDTO {
 		this.writer = writer;
 	}
 
-
 	@Builder
-	public BoardDTO(Long id, String title, String content, String writer, Long viewcnt, LocalDateTime createdAt) {
+	public BoardDTO(Long id, String title, String content, String writer, Long viewcnt, Timestamp createdAt) {
 		this.id = id;
 		this.title = title;
 		this.content = content;
@@ -32,4 +34,6 @@ public class BoardDTO {
 		this.viewcnt = viewcnt;
 		this.createdAt = createdAt;
 	}
+
+
 }
